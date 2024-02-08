@@ -2,20 +2,15 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   console.log("Content Loaded");
-
-  function updateValue() {
-    UsernameInput.textContent = e.target.value;
-  }
-  const UsernameInput = document.getElementById("username");
-  UsernameInput.addEventListener("input", updateValue);
-  function GetUserInfo() {
-    const username = UsernameInput.textContent;
-    url = `https://api.github.com/users/${username}`;
-  }
   const userSearch = document.getElementById("userSearch");
-  userSearch.addEventListener("submit", GetUserInfo);
-  function get(url) {
-    return fetch(`url`, {
+  const UsernameInput = document.getElementById("username");
+  const username = UsernameInput.textContent;
+  console.log(userSearch);
+  console.log(UsernameInput);
+  console.log(username);
+  function GetUserInfo({ userName }) {
+    const url = `https://api.github.com/users/macgyversean`;
+    fetch(url, {
       method: "get",
       headers: {
         "User-Agent": "SeanCarroll/3.0",
@@ -27,6 +22,11 @@ document.addEventListener("DOMContentLoaded", function () {
       .then(function (data) {
         return data;
       });
-    console.log(data);
   }
+
+  function updateValue(e) {
+    UsernameInput.textContent = e.target.value;
+  }
+  UsernameInput.addEventListener("input", updateValue);
+  userSearch.addEventListener("click", () => GetUserInfo({ username }));
 });
